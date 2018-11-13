@@ -4,8 +4,13 @@
  	<select id="getRecordByCondition" resultType="int">
  		select count(*) 
  			from t_user 
+ 		<where>
+ 			<if test="loginacct!=null">
+ 				loginacct like concat('%',#{loginacct},'%')
+ 			</if>
+ 		</where>
  	</select>
- 	<select id="getAllUserByCondition">
+ 	<select id="getAllUserByCondition" resultType="com.kj.permission.bean.User">
  		select *
  			from t_user 
  		<where>

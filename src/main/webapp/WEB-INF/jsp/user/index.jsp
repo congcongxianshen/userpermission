@@ -9,9 +9,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="${APP_PATH }/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="${APP_PATH }/css/font-awesome.min.css">
+	<link rel="stylesheet" href="${APP_PATH }/css/main.css">
 	<style>
 	.tree li {
         list-style-type: none;
@@ -135,10 +135,10 @@
   <div class="form-group has-feedback">
     <div class="input-group">
       <div class="input-group-addon">查询条件</div>
-      <input class="form-control has-success" type="text" placeholder="请输入查询条件">
+      <input id="queryText" class="form-control has-success" type="text" placeholder="请输入查询条件">
     </div>
   </div>
-  <button type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查询</button>
+  <button id="queryBtn" type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查询</button>
 </form>
 <button type="button" class="btn btn-danger" style="float:right;margin-left:10px;"><i class=" glyphicon glyphicon-remove"></i> 删除</button>
 <button type="button" class="btn btn-primary" style="float:right;" onclick="window.location.href='add.html'"><i class="glyphicon glyphicon-plus"></i> 新增</button>
@@ -156,211 +156,14 @@
                   <th width="100">操作</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-				  <td><input type="checkbox"></td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>
-				      <button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>
-				      <button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>
-					  <button type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>
-				  </td>
-                </tr>
-                <tr>
-                  <td>2</td>
-				  <td><input type="checkbox"></td>
-                  <td>amet</td>
-                  <td>consectetur</td>
-                  <td>adipiscing</td>
-                  <td>
-				      <button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>
-				      <button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>
-					  <button type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>
-				  </td>
-                </tr>
-                <tr>
-                  <td>3</td>
-				  <td><input type="checkbox"></td>
-                  <td>Integer</td>
-                  <td>nec</td>
-                  <td>odio</td>
-                  <td>
-				      <button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>
-				      <button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>
-					  <button type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>
-				  </td>
-                </tr>
-                <tr>
-                  <td>4</td>
-				  <td><input type="checkbox"></td>
-                  <td>libero</td>
-                  <td>Sed</td>
-                  <td>cursus</td>
-                  <td>
-				      <button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>
-				      <button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>
-					  <button type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>
-				  </td>
-                </tr>
-                <tr>
-                  <td>5</td>
-				  <td><input type="checkbox"></td>
-                  <td>dapibus</td>
-                  <td>diam</td>
-                  <td>Sed</td>
-                  <td>
-				      <button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>
-				      <button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>
-					  <button type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>
-				  </td>
-                </tr>
-                <tr>
-                  <td>6</td>
-				  <td><input type="checkbox"></td>
-                  <td>Nulla</td>
-                  <td>quis</td>
-                  <td>sem</td>
-                  <td>
-				      <button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>
-				      <button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>
-					  <button type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>
-				  </td>
-                </tr>
-                <tr>
-                  <td>7</td>
-				  <td><input type="checkbox"></td>
-                  <td>nibh</td>
-                  <td>elementum</td>
-                  <td>imperdiet</td>
-                  <td>
-				      <button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>
-				      <button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>
-					  <button type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>
-				  </td>
-                </tr>
-                <tr>
-                  <td>8</td>
-				  <td><input type="checkbox"></td>
-                  <td>sagittis</td>
-                  <td>ipsum</td>
-                  <td>Praesent</td>
-                  <td>
-				      <button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>
-				      <button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>
-					  <button type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>
-				  </td>
-                </tr>
-                <tr>
-                  <td>9</td>
-				  <td><input type="checkbox"></td>
-                  <td>Fusce</td>
-                  <td>nec</td>
-                  <td>tellus</td>
-                  <td>
-				      <button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>
-				      <button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>
-					  <button type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>
-				  </td>
-                </tr>
-                <tr>
-                  <td>10</td>
-				  <td><input type="checkbox"></td>
-                  <td>augue</td>
-                  <td>semper</td>
-                  <td>porta</td>
-                  <td>
-				      <button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>
-				      <button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>
-					  <button type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>
-				  </td>
-                </tr>
-                <tr>
-                  <td>11</td>
-				  <td><input type="checkbox"></td>
-                  <td>massa</td>
-                  <td>Vestibulum</td>
-                  <td>lacinia</td>
-                  <td>
-				      <button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>
-				      <button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>
-					  <button type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>
-				  </td>
-                </tr>
-                <tr>
-                  <td>12</td>
-				  <td><input type="checkbox"></td>
-                  <td>eget</td>
-                  <td>nulla</td>
-                  <td>Class</td>
-                  <td>
-				      <button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>
-				      <button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>
-					  <button type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>
-				  </td>
-                </tr>
-                <tr>
-                  <td>13</td>
-				  <td><input type="checkbox"></td>
-                  <td>taciti</td>
-                  <td>sociosqu</td>
-                  <td>ad</td>
-                  <td>
-				      <button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>
-				      <button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>
-					  <button type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>
-				  </td>
-                </tr>
-                <tr>
-                  <td>14</td>
-				  <td><input type="checkbox"></td>
-                  <td>torquent</td>
-                  <td>per</td>
-                  <td>conubia</td>
-                  <td>
-				      <button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>
-				      <button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>
-					  <button type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>
-				  </td>
-                </tr>
-                <tr>
-                  <td>15</td>
-				  <td><input type="checkbox"></td>
-                  <td>per</td>
-                  <td>inceptos</td>
-                  <td>himenaeos</td>
-                  <td>
-				      <button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>
-				      <button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>
-					  <button type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>
-				  </td>
-                </tr>
-                <tr>
-                  <td>16</td>
-				  <td><input type="checkbox"></td>
-                  <td>sodales</td>
-                  <td>ligula</td>
-                  <td>in</td>
-                  <td>
-				      <button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>
-				      <button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>
-					  <button type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>
-				  </td>
-                </tr>
+              <tbody id="userInfos">
+              
               </tbody>
 			  <tfoot>
 			     <tr >
 				     <td colspan="6" align="center">
 						<ul class="pagination">
-								<li class="disabled"><a href="#">上一页</a></li>
-								<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-								<li><a href="#">下一页</a></li>
+								
 							 </ul>
 					 </td>
 				 </tr>
@@ -374,10 +177,12 @@
       </div>
     </div>
 
-    <script src="jquery/jquery-2.1.1.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-	<script src="script/docs.min.js"></script>
+    <script src="${APP_PATH }/jquery/jquery-2.1.1.min.js"></script>
+    <script src="${APP_PATH }/bootstrap/js/bootstrap.min.js"></script>
+	<script src="${APP_PATH }/script/docs.min.js"></script>
+	<script src="${APP_PATH }/layer/layer.js"></script>
         <script type="text/javascript">
+        var likeflg=false;
             $(function () {
 			    $(".list-group-item").click(function(){
 				    if ( $(this).find("ul") ) {
@@ -391,6 +196,18 @@
 				});
 			    
 			    pageQuery(1); //默认查询首页
+			    
+			    $("#queryBtn").click(function(){
+			    	var queryText = $("#queryText").val();
+			    	console.log(queryText);
+			    	if(queryText!=""){
+			    		likeflg=true;
+			    	}else{
+			    		likeflg=false;
+			    	}
+			    		
+			    	pageQuery(1); 
+	            });
             });
             $("tbody .btn-success").click(function(){
                 window.location.href = "assignRole.html";
@@ -398,27 +215,79 @@
             $("tbody .btn-primary").click(function(){
                 window.location.href = "edit.html";
             });
-            function pageQuery(pegeno){
+            function pageQuery(pageno){
             	var loadingIndex = null;
+            	var queryText = $("#queryText").val();
+            	var jsondata = {
+            			"pageno":pageno,
+            			"pagesize":5
+            		}
+            	if(likeflg){
+            		jsondata.queryText=queryText;
+            	}
             	$.ajax({
             		type:"POST",
             		url:"${APP_PATH}/user/getPageInfo",
-            		data:{
-            			"pegeno":pegeno,
-            			"pagesize":pagesize
-            		}, 
+            		data:jsondata, 
             		beforeSend:function(){
         				loadingIndex = layer.msg('处理中', {icon: 16});
         			},
             		success:function(result){
             			layer.close(loadingIndex);
             			if(result.success){
+            				console.log(result);
+            				var pageInfo = result.data;
+            				var userList = pageInfo.datas;
+            				var userContent="";
+            				var pageContent="";
+            				$.each(userList,function(index,user){
+            					userContent+='<tr>'
+            					userContent+='<td>'+(index+1)+'</td>'
+            					userContent+=' <td><input type="checkbox"></td>'
+            					userContent+=' <td>'+user.loginacct+'</td>'
+            					userContent+=' <td>'+user.username+'</td>'
+            					userContent+='<td>'+user.email+'</td>'
+            					userContent+='<td>'
+            					userContent+=' <button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>'
+            					userContent+=' <button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>'
+            					userContent+=' <button type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>'
+            					userContent+='</td>'
+            					userContent+='</tr>'
+
+            				});
+            				$("#userInfos").html(userContent);
+            				console.log(pageno);
+            				if(pageno>1){ //存在上一页
+            					pageContent+='<li onclick="toupperpage('+(pageno-1)+')"><a href="#">上一页</a></li>';
+            				}
+            				for(var i=1;i<=pageInfo.pagenototal;i++){
+            					if(pageno==i){
+            						pageContent+='<li onclick="tocurrentpage('+(i)+')" class="active"><a href="#">'+i+'</a></li>';
+            					}else{
+            						pageContent+='<li onclick="tocurrentpage('+(i)+')"><a href="#">'+i+'</a></li>';
+            					}
+            				}
+            				if(pageno<pageInfo.pagenototal){ //存在上一页
+            					pageContent+='<li onclick="tonextpage('+(pageno+1)+')"><a href="#">下一页</a></li>';
+            				}
             				
+            				$(".pagination").html(pageContent);
             			}else{
-            				
+            				 layer.msg("用户分页查询失败", {time:2000, icon:5, shift:6}, function(){
+                             });
             			}
             		}
             	});
+            }
+            function toupperpage(pageno){
+            	pageQuery(pageno)
+            }
+            function tonextpage(pageno){
+            	pageQuery(pageno)
+            }
+            function tocurrentpage(pageno){
+            	console.log(pageno);
+            	pageQuery(pageno)
             }
         </script>
   </body>

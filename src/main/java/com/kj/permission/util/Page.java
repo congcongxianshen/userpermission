@@ -9,6 +9,7 @@ public class Page<T> {
 	private Integer total;	// 总记录数
 	private Integer pagenototal; //总页数
 	private List<T> datas=new ArrayList<T>();
+
 	public Integer getPagesize() {
 		return pagesize;
 	}

@@ -23,15 +23,15 @@ public class UserController {
 	
 	@RequestMapping("/getPageInfo")
 	@ResponseBody
-	public Object getPageInfo(Integer pegeno,Integer pagesize,String loginacct){
+	public Object getPageInfo(Integer pageno,Integer pagesize,String queryText){
 		ResultVO resultVO = new ResultVO();
 		Page<User> page = new Page<User>();
 		
 		try {
 			Map<String, Object> map = new HashMap<String,Object>();
-			map.put("start", pegeno*pagesize);
+			map.put("start", (pageno-1)*pagesize);
 			map.put("pagesize", pagesize);
-			map.put("loginacct", loginacct);
+			map.put("loginacct", queryText);
 			Integer pagenototal = 0;
 			
 			//查询总记录数
@@ -48,7 +48,6 @@ public class UserController {
 			page.setPagesize(pagesize);
 			page.setPagenototal(pagenototal);
 			page.setDatas(users);
-			
 			resultVO.setData(page);
 			resultVO.setSuccess(true);
 		} catch (Exception e) {
