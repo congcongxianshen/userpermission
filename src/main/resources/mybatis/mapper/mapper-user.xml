@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kj.permission.dao.UserDao">
- 
+ 	<select id="getRecordByCondition" resultType="int">
+ 		select count(*) 
+ 			from t_user 
+ 	</select>
+ 	<select id="getAllUserByCondition">
+ 		select *
+ 			from t_user 
+ 		<where>
+ 			<if test="loginacct!=null">
+ 				loginacct like concat('%',#{loginacct},'%')
+ 			</if>
+ 		</where>
+ 		limit #{start},#{pagesize}	
+ 	</select>
 </mapper>
