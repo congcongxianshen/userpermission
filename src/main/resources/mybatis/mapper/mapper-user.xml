@@ -18,6 +18,21 @@
  				loginacct like concat('%',#{loginacct},'%')
  			</if>
  		</where>
+ 		order by createtime desc
  		limit #{start},#{pagesize}	
  	</select>
+ 	
+ 	<insert id="insertUser" parameterType="com.kj.permission.bean.User">
+ 		insert into t_user (username, loginacct, userpswd,  email, createtime) 
+ 					values (#{username},#{loginacct},#{userpswd},#{email},#{createtime})
+ 	</insert>
+ 	
+ 	<update id="updateUer" parameterType="com.kj.permission.bean.User">
+ 		update t_user set username=#{username},loginacct=#{loginacct},userpswd=#{userpswd},email=#{email},
+ 			createtime=#{createtime} where id=#{id}
+ 	</update>
+ 	
+ 	<delete id="removeUser">
+ 		delete from t_user where id=#{id}
+ 	</delete>
 </mapper>

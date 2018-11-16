@@ -15,6 +15,14 @@ public interface UserService {
 
 	List<User> getAllUserByCondition(Map<String, Object> map);
 
+	void insertUser(User user);
+
+	User getUserById(Integer id);
+
+	void updateUer(User user);
+
+	void removeUser(Integer id);
+
 	
 
 }

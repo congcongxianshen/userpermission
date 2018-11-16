@@ -1,11 +1,14 @@
 package com.kj.permission.controller;
 
+import java.security.interfaces.RSAKey;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -20,6 +23,64 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@ResponseBody
+	@RequestMapping("/remove")
+	public Object removeUser(Integer id){
+		ResultVO resultVO = new ResultVO();
+		try {
+			userService.removeUser(id);
+			resultVO.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			resultVO.setSuccess(false);
+		}
+		return resultVO;
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping("/doedit")
+	public Object doedit(User user){
+		ResultVO resultVO = new ResultVO();
+		try {
+			userService.updateUer(user);
+			resultVO.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			resultVO.setSuccess(false);
+		}
+		return resultVO;
+	}
+	
+	
+	@RequestMapping("/toedit")
+	public String toedit(Integer id,Model model){
+		
+		User user = userService.getUserById(id);
+		model.addAttribute("user", user);
+		return "user/edit";
+	}
+	
+	@RequestMapping("/doAdd")
+	@ResponseBody
+	public Object doAdd(User user){
+		ResultVO resultVO = new ResultVO();
+		try {
+			user.setCreatetime(new Date());
+			user.setUserpswd("123");
+			userService.insertUser(user);
+			resultVO.setSuccess(true);
+		} catch (Exception e) {
+			resultVO.setSuccess(false);
+		}
+		return resultVO;
+	}
+	
+	@RequestMapping("/toadd")
+	public String toAdd(){
+		return "user/add";
+	}
 	
 	@RequestMapping("/getPageInfo")
 	@ResponseBody

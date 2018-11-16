@@ -33,6 +33,24 @@ public class UserServiceImpl implements UserService{
 		return userDao.getAllUserByCondition(map);
 	}
 
+	public void insertUser(User user) {
+		userDao.insertUser(user);
+	}
+
+	public User getUserById(Integer id) {
+		return userDao.getUserById(id);
+	}
+
+	public void updateUer(User user) {
+		
+		userDao.updateUer(user);
+	}
+
+	public void removeUser(Integer id) {
+		userDao.removeUser(id);
+		
+	}
+
 	
 
 }

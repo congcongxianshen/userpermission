@@ -18,5 +18,14 @@ public interface UserDao {
 	Integer getRecordByCondition(Map<String, Object> map);
 
 	List<User> getAllUserByCondition(Map<String, Object> map);
+	
+	void insertUser(User user);
+
+	@Select("select * from t_user where id=#{id}")
+	User getUserById(Integer id);
+
+	void updateUer(User user);
+
+	void removeUser(Integer id);
 
 }

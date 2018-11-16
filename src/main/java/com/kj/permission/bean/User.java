@@ -1,18 +1,21 @@
 package com.kj.permission.bean;
 
+import java.util.Date;
+
 public class User {
+	
 	private Integer id;
 	private String username;
 	private String loginacct;
 	private String userpswd;
 	private String email;
-	private String createtime;
+	private Date createtime;
 
-	public String getCreatetime() {
+	public Date getCreatetime() {
 		return createtime;
 	}
-	public void setCreatetime(String createtime) {
-		this.createtime = createtime;
+	public void setCreatetime(Date date) {
+		this.createtime = date;
 	}
 	public String getEmail() {
 		return email;
