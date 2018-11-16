@@ -140,36 +140,38 @@
   </div>
   <button id="queryBtn" type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查询</button>
 </form>
-<button type="button" class="btn btn-danger" style="float:right;margin-left:10px;"><i class=" glyphicon glyphicon-remove"></i> 删除</button>
+<button type="button" onclick="removeUsersInfo()" class="btn btn-danger" style="float:right;margin-left:10px;"><i class=" glyphicon glyphicon-remove"></i> 删除</button>
 <button type="button" class="btn btn-primary" style="float:right;" onclick="window.location.href='${APP_PATH}/user/toadd'"><i class="glyphicon glyphicon-plus"></i> 新增</button>
 <br>
  <hr style="clear:both;">
           <div class="table-responsive">
-            <table class="table  table-bordered">
-              <thead>
-                <tr >
-                  <th width="30">#</th>
-				  <th width="30"><input type="checkbox"></th>
-                  <th>账号</th>
-                  <th>名称</th>
-                  <th>邮箱地址</th>
-                  <th width="100">操作</th>
-                </tr>
-              </thead>
-              <tbody id="userInfos">
-              
-              </tbody>
-			  <tfoot>
-			     <tr >
-				     <td colspan="6" align="center">
-						<ul class="pagination">
-								
-							 </ul>
-					 </td>
-				 </tr>
+			<form id="userForm">
+				<table class="table  table-bordered">
+				  <thead>
+					<tr >
+					  <th width="30">#</th>
+					  <th width="30"><input type="checkbox" id="allSelBox"></th>
+					  <th>账号</th>
+					  <th>名称</th>
+					  <th>邮箱地址</th>
+					  <th width="100">操作</th>
+					</tr>
+				  </thead>
+				  <tbody id="userInfos">
 
-			  </tfoot>
-            </table>
+				  </tbody>
+				  <tfoot>
+					 <tr >
+						 <td colspan="6" align="center">
+							<ul class="pagination">
+
+								 </ul>
+						 </td>
+					 </tr>
+
+				  </tfoot>
+				</table>
+			</form>
           </div>
 			  </div>
 			</div>

@@ -1,11 +1,13 @@
 package com.kj.permission.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kj.permission.bean.Role;
 import com.kj.permission.bean.User;
 import com.kj.permission.dao.UserDao;
 import com.kj.permission.service.UserService;
@@ -50,6 +52,22 @@ public class UserServiceImpl implements UserService{
 		userDao.removeUser(id);
 		
 	}
+
+	public void removeUsers(List<Integer> ids) {
+		userDao.removeUsers(ids);
+		
+	}
+
+	public void addRoleInfo(HashMap<String, Object> map) {
+		userDao.addRoleInfo(map);
+		
+	}
+
+	public void deleteRoleInfo(HashMap<String, Object> map) {
+		userDao.deleteRoleInfo(map);		
+	}
+
+	
 
 	
 

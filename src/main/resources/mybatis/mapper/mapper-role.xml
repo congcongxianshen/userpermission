@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kj.permission.dao.RoleDao">
+ 	<select id="getAllRole"  resultType="com.kj.permission.bean.Role">
+ 		select * from t_role 
+ 	</select>
+ 	
+ 	<select id="getAllRoleById" parameterType="int" resultType="com.kj.permission.bean.Role">
+ 		select * from t_role where id in
+ 		(select roleid from t_user_role where userid=#{id})
+ 	</select>
+</mapper>

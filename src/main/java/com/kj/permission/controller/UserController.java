@@ -1,6 +1,8 @@
 package com.kj.permission.controller;
 
-import java.security.interfaces.RSAKey;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +14,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kj.permission.bean.Role;
 import com.kj.permission.bean.User;
+import com.kj.permission.service.RoleService;
 import com.kj.permission.service.UserService;
 import com.kj.permission.util.Page;
 import com.kj.permission.util.ResultVO;
@@ -23,6 +27,103 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private RoleService roleService; 
+	
+	@ResponseBody
+	@RequestMapping("/deleterole")
+	public Object deleteroles(Integer[] assignroleid,Integer userid){
+		ResultVO resultVO = new ResultVO();
+		try {
+			HashMap<String, Object> map = new HashMap<String,Object>();
+			
+			map.put("userid", userid);
+			map.put("roleids", assignroleid);
+			
+			userService.deleteRoleInfo(map);
+			resultVO.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			resultVO.setSuccess(false);
+		}
+		return resultVO;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/addrole")
+	public Object addrole(Integer[] noassignroleid,Integer userid){
+		ResultVO resultVO = new ResultVO();
+		try {
+			HashMap<String, Object> map = new HashMap<String,Object>();
+			
+			map.put("userid", userid);
+			map.put("roleids", noassignroleid);
+			
+			userService.addRoleInfo(map);
+			resultVO.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			resultVO.setSuccess(false);
+		}
+		return resultVO;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/doassign")
+	public Object doassign(Integer id){
+		ResultVO resultVO = new ResultVO();
+		try {
+			
+			List<Role> allroles = roleService.getAllRole();
+			
+			List<Role> haveRole = roleService.getAllRoleById(id);
+			
+			List<Role> assignRole = new ArrayList<Role>();
+			List<Role> noassignRole = new ArrayList<Role>();
+			
+			
+			for (Role role : allroles) {
+				if(haveRole.contains(role)){
+					assignRole.add(role);
+				}else{
+					noassignRole.add(role);
+				}
+			}
+			
+			HashMap<String, Object> map = new HashMap<String,Object>();
+			map.put("assignRole", assignRole);
+			map.put("noassignRole", noassignRole);
+			
+			resultVO.setData(map);
+			resultVO.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			resultVO.setSuccess(false);
+		}
+		return resultVO;
+	}
+	
+	@RequestMapping("/toassign")
+	public String toassign(Integer id,Model model){
+		model.addAttribute("userid", id);
+		return "user/assign";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/removes")
+	public Object removeUsers(Integer[] userids){
+		ResultVO resultVO = new ResultVO();
+		try {
+			List<Integer> ids = Arrays.asList(userids);
+			userService.removeUsers(ids);
+			resultVO.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			resultVO.setSuccess(false);
+		}
+		return resultVO;
+	}
 	
 	@ResponseBody
 	@RequestMapping("/remove")

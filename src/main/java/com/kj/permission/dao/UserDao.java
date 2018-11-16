@@ -1,5 +1,6 @@
 package com.kj.permission.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,5 +28,11 @@ public interface UserDao {
 	void updateUer(User user);
 
 	void removeUser(Integer id);
+
+	void removeUsers(List<Integer> ids);
+
+	void addRoleInfo(HashMap<String, Object> map);
+
+	void deleteRoleInfo(HashMap<String, Object> map);
 
 }

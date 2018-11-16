@@ -1,8 +1,10 @@
 package com.kj.permission.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.kj.permission.bean.Role;
 import com.kj.permission.bean.User;
 
 public interface UserService {
@@ -22,6 +24,15 @@ public interface UserService {
 	void updateUer(User user);
 
 	void removeUser(Integer id);
+
+	void removeUsers(List<Integer> ids);
+
+	void addRoleInfo(HashMap<String, Object> map);
+
+	void deleteRoleInfo(HashMap<String, Object> map);
+
+
+
 
 	
 

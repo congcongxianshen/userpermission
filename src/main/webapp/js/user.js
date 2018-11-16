@@ -34,6 +34,13 @@ $(function () {
     $("tbody .btn-primary").click(function () {
         window.location.href = "edit.html";
     });
+    $("#allSelBox").click(function () {
+        var flg = this.checked; //获得单选框的状态
+        console.log(flg);
+        $("#userInfos :checkbox").each(function () {
+            this.checked=flg;
+        })
+    });
 });
     function pageQuery(pageno){
         var loadingIndex = null;
@@ -63,12 +70,12 @@ $(function () {
                     $.each(userList,function(index,user){
                         userContent+='<tr>'
                         userContent+='<td>'+(index+1)+'</td>'
-                        userContent+=' <td><input type="checkbox"></td>'
+                        userContent+=' <td><input type="checkbox" name="userids" value="'+user.id+'"></td>'
                         userContent+=' <td>'+user.loginacct+'</td>'
                         userContent+=' <td>'+user.username+'</td>'
                         userContent+='<td>'+user.email+'</td>'
                         userContent+='<td>'
-                        userContent+=' <button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>'
+                        userContent+=' <button onclick="assignRole('+user.id+')" type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>'
                         userContent+=' <button onclick="editUser('+user.id+')" type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>'
                         userContent+=' <button onclick="removeUser('+user.id+', \''+user.username+'\')" type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>'
                         userContent+='</td>'
@@ -76,7 +83,7 @@ $(function () {
 
                     });
                     $("#userInfos").html(userContent);
-                    console.log(pageno);
+
                     if(pageno>1){ //存在上一页  "('2','89')"
                         pageContent+='<li onclick="toupperpage('+(pageno-1)+')"><a href="#">上一页</a></li>';
                     }
@@ -129,7 +136,7 @@ $(function () {
                        loadingIndex = layer.msg('处理中', {icon: 16});
                    },
                    success:function(result){
-                       layer.close(loadingIndex);
+
                        if(result.success){
                            layer.msg("用戶信息刪除成功", {time:2000, icon:6}, function(){
                                pageQuery(1);
@@ -140,11 +147,47 @@ $(function () {
                        }
                    }
                });
-
+              layer.close(loadingIndex);
             }, function(cindex){
-
+              layer.close(loadingIndex);
             });
         }
     }
+    function removeUsersInfo() {
+        var boxs = $("#userInfos :checked");
 
-
+        if(boxs.length == 0){
+            layer.msg("请选择一个用户", {time:2000, icon:6}, function(){
+                return;
+            });
+        }else{
+            layer.confirm('確定刪除用户信息，请继续',  {icon: 3, title:'提示'}, function(cindex){
+                var loadingIndex=null;
+                $.ajax({
+                    type:"POST",
+                    url:"/userpermission/user/removes",
+                    data:$("#userForm").serialize(),
+                    beforeSend:function(){
+                        loadingIndex = layer.msg('处理中', {icon: 16});
+                    },
+                    success:function(result){
+                        layer.close(loadingIndex);
+                        if(result.success){
+                            layer.msg("用户信息刪除成功", {time:2000, icon:6}, function(){
+                                pageQuery(1);
+                            });
+                        }else{
+                            layer.msg("用户信息刪除失败", {time:2000, icon:5, shift:6}, function(){
+                            });
+                        }
+                    }
+                });
+                layer.close(cindex);
+            }, function(cindex){
+                layer.close(cindex);
+            });
+        }
+    }
+    function assignRole(id){
+        window.location.href="/userpermission/user/toassign?id="+id;
+    }
