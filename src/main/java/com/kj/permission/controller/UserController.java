@@ -232,7 +232,7 @@ public class UserController {
 	public String goUserIndexJsp2(){
 		//查询所有user
 		//List<User> users = userService.getAllUser();
-		
+		System.out.println("我是主干第二次提交代码");
 		return "user/index";
 	}
 }
