@@ -227,4 +227,11 @@ public class UserController {
 		
 		return "user/index";
 	}
+	@RequestMapping("/index2")
+	public String goUserIndexJsp2(){
+		//查询所有user
+		//List<User> users = userService.getAllUser();
+		
+		return "user/index";
+	}
 }
