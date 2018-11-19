@@ -232,6 +232,7 @@ public class UserController {
 		//查询所有user
 		//List<User> users = userService.getAllUser();
 		System.out.println("这是我的分支代码书写branch");
-		return "user/index";
+		System.out.println("这是我的分支代码书写branch第二次提交代码");
+		return "user/index2";
 	}
 }
