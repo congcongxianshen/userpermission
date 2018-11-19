@@ -231,7 +231,7 @@ public class UserController {
 	public String goUserIndexJsp2(){
 		//查询所有user
 		//List<User> users = userService.getAllUser();
-		
+		System.out.println("这是我的分支代码书写branch");
 		return "user/index";
 	}
 }
