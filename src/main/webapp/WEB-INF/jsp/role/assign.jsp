@@ -63,64 +63,64 @@
 			<div class="tree">
 				<ul style="padding-left:0px;" class="list-group">
 					<li class="list-group-item tree-closed" >
-						<a href="main.html"><i class="glyphicon glyphicon-dashboard"></i> 控制面板</a> 
+						<a href="main.html"><i class="glyphicon glyphicon-dashboard"></i> 控制面板</a>
 					</li>
 					<li class="list-group-item">
-						<span><i class="glyphicon glyphicon glyphicon-tasks"></i> 权限管理 <span class="badge" style="float:right">3</span></span> 
+						<span><i class="glyphicon glyphicon glyphicon-tasks"></i> 权限管理 <span class="badge" style="float:right">3</span></span>
 						<ul style="margin-top:10px;">
 							<li style="height:30px;">
-								<a href="user.html" style="color:red;"><i class="glyphicon glyphicon-user"></i> 用户维护</a> 
+								<a href="user.html" style="color:red;"><i class="glyphicon glyphicon-user"></i> 用户维护</a>
 							</li>
 							<li style="height:30px;">
-								<a href="role.html"><i class="glyphicon glyphicon-certificate"></i> 角色维护</a> 
+								<a href="role.html"><i class="glyphicon glyphicon-certificate"></i> 角色维护</a>
 							</li>
 							<li style="height:30px;">
-								<a href="permission.html"><i class="glyphicon glyphicon-lock"></i> 许可维护</a> 
-							</li>
-						</ul>
-					</li>
-					<li class="list-group-item tree-closed">
-						<span><i class="glyphicon glyphicon-ok"></i> 业务审核 <span class="badge" style="float:right">3</span></span> 
-						<ul style="margin-top:10px;display:none;">
-							<li style="height:30px;">
-								<a href="auth_cert.html"><i class="glyphicon glyphicon-check"></i> 实名认证审核</a> 
-							</li>
-							<li style="height:30px;">
-								<a href="auth_adv.html"><i class="glyphicon glyphicon-check"></i> 广告审核</a> 
-							</li>
-							<li style="height:30px;">
-								<a href="auth_project.html"><i class="glyphicon glyphicon-check"></i> 项目审核</a> 
+								<a href="permission.html"><i class="glyphicon glyphicon-lock"></i> 许可维护</a>
 							</li>
 						</ul>
 					</li>
 					<li class="list-group-item tree-closed">
-						<span><i class="glyphicon glyphicon-th-large"></i> 业务管理 <span class="badge" style="float:right">7</span></span> 
+						<span><i class="glyphicon glyphicon-ok"></i> 业务审核 <span class="badge" style="float:right">3</span></span>
 						<ul style="margin-top:10px;display:none;">
 							<li style="height:30px;">
-								<a href="cert.html"><i class="glyphicon glyphicon-picture"></i> 资质维护</a> 
+								<a href="auth_cert.html"><i class="glyphicon glyphicon-check"></i> 实名认证审核</a>
 							</li>
 							<li style="height:30px;">
-								<a href="type.html"><i class="glyphicon glyphicon-equalizer"></i> 分类管理</a> 
+								<a href="auth_adv.html"><i class="glyphicon glyphicon-check"></i> 广告审核</a>
 							</li>
 							<li style="height:30px;">
-								<a href="process.html"><i class="glyphicon glyphicon-random"></i> 流程管理</a> 
+								<a href="auth_project.html"><i class="glyphicon glyphicon-check"></i> 项目审核</a>
+							</li>
+						</ul>
+					</li>
+					<li class="list-group-item tree-closed">
+						<span><i class="glyphicon glyphicon-th-large"></i> 业务管理 <span class="badge" style="float:right">7</span></span>
+						<ul style="margin-top:10px;display:none;">
+							<li style="height:30px;">
+								<a href="cert.html"><i class="glyphicon glyphicon-picture"></i> 资质维护</a>
 							</li>
 							<li style="height:30px;">
-								<a href="advertisement.html"><i class="glyphicon glyphicon-hdd"></i> 广告管理</a> 
+								<a href="type.html"><i class="glyphicon glyphicon-equalizer"></i> 分类管理</a>
 							</li>
 							<li style="height:30px;">
-								<a href="message.html"><i class="glyphicon glyphicon-comment"></i> 消息模板</a> 
+								<a href="process.html"><i class="glyphicon glyphicon-random"></i> 流程管理</a>
 							</li>
 							<li style="height:30px;">
-								<a href="project_type.html"><i class="glyphicon glyphicon-list"></i> 项目分类</a> 
+								<a href="advertisement.html"><i class="glyphicon glyphicon-hdd"></i> 广告管理</a>
 							</li>
 							<li style="height:30px;">
-								<a href="tag.html"><i class="glyphicon glyphicon-tags"></i> 项目标签</a> 
+								<a href="message.html"><i class="glyphicon glyphicon-comment"></i> 消息模板</a>
+							</li>
+							<li style="height:30px;">
+								<a href="project_type.html"><i class="glyphicon glyphicon-list"></i> 项目分类</a>
+							</li>
+							<li style="height:30px;">
+								<a href="tag.html"><i class="glyphicon glyphicon-tags"></i> 项目标签</a>
 							</li>
 						</ul>
 					</li>
 					<li class="list-group-item tree-closed" >
-						<a href="param.html"><i class="glyphicon glyphicon-list-alt"></i> 参数管理</a> 
+						<a href="param.html"><i class="glyphicon glyphicon-list-alt"></i> 参数管理</a>
 					</li>
 				</ul>
 			</div>
@@ -133,6 +133,7 @@
 				</ol>
 
 			<div class="panel panel-default">
+				<button class="btn btn-success" onclick="doAssign()">分配许可</button>
 				<ul id="treeDemo" class="ztree"></ul>
 			</div>
 
@@ -178,10 +179,13 @@
 
 
 	var setting = {
-	//异步加载数据
+		check:{
+			enable:true
+		},
+		//异步加载数据
 		async: {
 			enable: true,  //启用
-			url:"${APP_PATH}/permission/loadData",
+			url:"${APP_PATH}/role/loadData?roleid="+${param.roleid},
 			autoParam:["id", "name=n", "level=lv"]
 		},
 		view: {
@@ -191,78 +195,40 @@
 				if ( treeNode.icon ) {
 					icoObj.removeClass("button ico_docu ico_open").addClass(treeNode.icon).css("background","");
 				}
-			},
-			addHoverDom: function(treeId, treeNode){  //用于当鼠标移动到节点上时，显示用户自定义控件，显示隐藏状态同 zTree 内部的编辑、删除按钮
-				//   <a><span></span></a>
-				var aObj = $("#" + treeNode.tId + "_a"); // tId = permissionTree_1, ==> $("#permissionTree_1_a")
-				aObj.attr("href", "javascript:;");
-				if (treeNode.editNameFlag || $("#btnGroup"+treeNode.tId).length>0) return;
-				var s = '<span id="btnGroup'+treeNode.tId+'">';
-				if ( treeNode.level == 0 ) {  //root节点
-				s += '<a class="btn btn-info dropdown-toggle btn-xs" style="margin-left:10px;padding-top:0px;" onclick="addNode('+treeNode.id+')" href="#" >&nbsp;&nbsp;<i class="fa fa-fw fa-plus rbg "></i></a>';
-				} else if ( treeNode.level == 1 ) {
-				s += '<a class="btn btn-info dropdown-toggle btn-xs" style="margin-left:10px;padding-top:0px;"  onclick="editNode('+treeNode.id+')" href="#" title="修改权限信息">&nbsp;&nbsp;<i class="fa fa-fw fa-edit rbg "></i></a>';
-				if (treeNode.children.length == 0) {
-				s += '<a class="btn btn-info dropdown-toggle btn-xs" style="margin-left:10px;padding-top:0px;" onclick="deleteNode('+treeNode.id+')" href="#" >&nbsp;&nbsp;<i class="fa fa-fw fa-times rbg "></i></a>';
-				}
-				s += '<a class="btn btn-info dropdown-toggle btn-xs" style="margin-left:10px;padding-top:0px;" onclick="addNode('+treeNode.id+')" href="#" >&nbsp;&nbsp;<i class="fa fa-fw fa-plus rbg "></i></a>';
-				} else if ( treeNode.level == 2 ) {
-				s += '<a class="btn btn-info dropdown-toggle btn-xs" style="margin-left:10px;padding-top:0px;"  onclick="editNode('+treeNode.id+')" href="#" title="修改权限信息">&nbsp;&nbsp;<i class="fa fa-fw fa-edit rbg "></i></a>';
-				s += '<a class="btn btn-info dropdown-toggle btn-xs" style="margin-left:10px;padding-top:0px;" onclick="deleteNode('+treeNode.id+')" href="#">&nbsp;&nbsp;<i class="fa fa-fw fa-times rbg "></i></a>';
-				}
-
-				s += '</span>';
-				aObj.after(s);
-			},
-			removeHoverDom: function(treeId, treeNode){  //用于当鼠标移出节点时，隐藏用户自定义控件，显示隐藏状态同 zTree 内部的编辑、删除按钮
-				$("#btnGroup"+treeNode.tId).remove();
 			}
 		}
 	}
-
 		// zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
 		zTreeObj = $.fn.zTree.init($("#treeDemo"), setting);
 	});
+	function doAssign(){
+			var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+			var nodes = treeObj.getCheckedNodes(true);
+			var ids = "roleid=${param.roleid}";
+			if(nodes.length==0){
+				layer.msg("请选择需要分配的许可信息", {time:2000, icon:5, shift:6}, function(){
+				});
+				return;
+			}else{
+				$.each(nodes,function(index,node){
+					ids+="&permissionids="+node.id;
+				})
+			$.ajax({
+				type:"POST",
+				url:"${APP_PATH}/role/doAssign",
+				data:ids,
+				success:function(result){
+					if(result.success){
+						layer.msg("菜单保存成功", {time:2000, icon:6}, function(){
 
-	function addNode(id){
-		window.location.href="${APP_PATH}/permission/addNode?id="+id;
-	}
-	function editNode(id){
-		window.location.href="${APP_PATH}/permission/editNode?id="+id;
-	}
-	function deleteNode(id){
-		//window.location.href="${APP_PATH}/permission/editNode?id="+id;
-	layer.confirm('確定刪除菜单，请继续',  {icon: 3, title:'提示'}, function(){
-		var loadingIndex = null;
-		$.ajax({
-			type:"POST",
-			url:"${APP_PATH}/permission/deleteNode",
-			data:{
-				"id":id
-			},
-			beforeSend:function(){
-				loadingIndex = layer.msg('处理中', {icon: 16});
-			},
-			success:function(result){
-			layer.close(loadingIndex);
-				if(result.success){
-
-					layer.msg("删除成功", {time:1000, icon:6}, function(){
-						var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
-						treeObj.reAsyncChildNodes(null, "refresh");
-					});
-				}else{
-
-					layer.msg("删除失败", {time:1000, icon:5, shift:6}, function(){
-					});
+						});
+					}else{
+						layer.msg("菜单保存失败", {time:2000, icon:5, shift:6}, function(){
+						});
+					}
 				}
-			}
-		});
-			layer.close(cindex);
-	}, function(cindex){
-		layer.close(cindex);
-	});
-
+			});
+	}
 	}
     </script>
   </body>

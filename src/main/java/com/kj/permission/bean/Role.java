@@ -1,9 +1,20 @@
 package com.kj.permission.bean;
 
+import java.util.Date;
+
 public class Role {
 	
 	private Integer id;
 	private String name;
+	private Date createtime;
+	
+	
+	public Date getCreatetime() {
+		return createtime;
+	}
+	public void setCreatetime(Date createtime) {
+		this.createtime = createtime;
+	}
 	public Integer getId() {
 		return id;
 	}

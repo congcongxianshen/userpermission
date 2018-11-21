@@ -5,8 +5,29 @@
  		select * from t_role 
  	</select>
  	
- 	<select id="getAllRoleById" parameterType="int" resultType="com.kj.permission.bean.Role">
+ 	<select id="getAllUserByCondition"  resultType="com.kj.permission.bean.Role">
  		select * from t_role where id in
  		(select roleid from t_user_role where userid=#{id})
  	</select>
+ 	
+ 	<select id="getAllRoleByCondition" resultType="com.kj.permission.bean.Role">
+ 		select * from t_role 
+ 		<where>
+ 			<if test="loginacct != null">
+ 				loginacct like concat('%',#{loginacct},'%')
+ 			</if>
+ 		</where>
+ 		order by createtime desc
+ 		limit #{start},#{pagesize}
+ 	</select>
+ 	
+ 	 	<select id="getRecordByCondition" resultType="int">
+ 			select count(*) from t_role 
+ 		<where>
+ 			<if test="loginacct != null">
+ 				loginacct like concat('%',#{loginacct},'%')
+ 			</if>
+ 		</where>
+ 	</select>
+
 </mapper>

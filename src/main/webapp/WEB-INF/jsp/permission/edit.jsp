@@ -128,16 +128,30 @@
 				<ol class="breadcrumb">
 				  <li><a href="#">首页</a></li>
 				  <li><a href="#">数据列表</a></li>
-				  <li class="active">角色分配</li>
+				  <li class="active">新增</li>
 				</ol>
-
 			<div class="panel panel-default">
-				<ul id="treeDemo" class="ztree"></ul>
-			</div>
+              <div class="panel-heading">表单数据<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-question-sign"></i></div></div>
+			  <div class="panel-body">
+				<form role="form" id="editform">
+				  <div class="form-group">
+					<label for="exampleInputPassword1">许可名称</label>
+					<input type="text" class="form-control" id="name" value=${permission.name} placeholder="请输入许可名称">
+				  </div>
+				  <div class="form-group">
+					<label for="exampleInputPassword1">链接地址</label>
+					<input type="text" class="form-control" id="url" value=${permission.url}  placeholder="请输入链接地址">
+				  </div>
 
-		</div>
+				  <button type="button" id="inserBtn" class="btn btn-success"><i class="glyphicon glyphicon-plus">修改</i>
+				  </button>
+				  <button type="button" id="goreset" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
+				</form>
+			  </div>
 			</div>
-	</div>
+        </div>
+      </div>
+    </div>
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
 		<div class="modal-content">
@@ -170,103 +184,62 @@
 	<script src="${APP_PATH }/layer/layer.js"></script>
 
     <script type="text/javascript">
+            $(function () {
+			    $(".list-group-item").click(function(){
+				    if ( $(this).find("ul") ) {
+						$(this).toggleClass("tree-closed");
+						if ( $(this).hasClass("tree-closed") ) {
+							$("ul", this).hide("fast");
+						} else {
+							$("ul", this).show("fast");
+						}
+					}
+				});
 
-	$(function () {
-	//var zTreeObj;
-	// zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
+				$('#inserBtn').click(function(){
+					var loadingIndex = null;
 
-	var zNodes =[
-	{ name:"父节点1 - 展开11111", open:true,
-	children: [
-	{ name:"父节点11 - 折叠",
-	children: [
-	{ name:"叶子节点111"},
-	{ name:"叶子节点112"},
-	{ name:"叶子节点113"},
-	{ name:"叶子节点114"}
-	]},
-	{ name:"父节点12 - 折叠",
-	children: [
-	{ name:"叶子节点121"},
-	{ name:"叶子节点122"},
-	{ name:"叶子节点123"},
-	{ name:"叶子节点124"}
-	]},
-	{ name:"父节点13 - 没有子节点", isParent:true}
-	]},
-	{ name:"父节点2 - 折叠",
-	children: [
-	{ name:"父节点21 - 展开", open:true,
-	children: [
-	{ name:"叶子节点211"},
-	{ name:"叶子节点212"},
-	{ name:"叶子节点213"},
-	{ name:"叶子节点214"}
-	]},
-	{ name:"父节点22 - 折叠",
-	children: [
-	{ name:"叶子节点221"},
-	{ name:"叶子节点222"},
-	{ name:"叶子节点223"},
-	{ name:"叶子节点224"}
-	]},
-	{ name:"父节点23 - 折叠",
-	children: [
-	{ name:"叶子节点231"},
-	{ name:"叶子节点232"},
-	{ name:"叶子节点233"},
-	{ name:"叶子节点234"}
-	]}
-	]},
-	{ name:"父节点3 - 没有子节点", isParent:true}
+					var name = $("#name").val();
+					var url = $("#url").val();
 
-	];
-	var setting = {
-	//异步加载数据
-		/*async: {
-			enable: true,  //启用
-			url:"${APP_PATH}/permission/loadData",
-			autoParam:["id", "name=n", "level=lv"]
-		},*/
-		view: {
-			selectedMulti: false,  //不能同时 ctrl选中多个节点
-			addDiyDom: function(treeId, treeNode){  //用于在节点上固定显示用户自定义控件  icon图标
-				var icoObj = $("#" + treeNode.tId + "_ico"); // tId = permissionTree_1, $("#permissionTree_1_ico")
-				if ( treeNode.icon ) {
-					icoObj.removeClass("button ico_docu ico_open").addClass(treeNode.icon).css("background","");
-				}
-			},
-			addHoverDom: function(treeId, treeNode){  //用于当鼠标移动到节点上时，显示用户自定义控件，显示隐藏状态同 zTree 内部的编辑、删除按钮
-				//   <a><span></span></a>
-				var aObj = $("#" + treeNode.tId + "_a"); // tId = permissionTree_1, ==> $("#permissionTree_1_a")
-				aObj.attr("href", "javascript:;");
-				if (treeNode.editNameFlag || $("#btnGroup"+treeNode.tId).length>0) return;
-				var s = '<span id="btnGroup'+treeNode.tId+'">';
-				if ( treeNode.level == 0 ) {
-				s += '<a class="btn btn-info dropdown-toggle btn-xs" style="margin-left:10px;padding-top:0px;" onclick="addNode('+treeNode.id+')" href="#" >&nbsp;&nbsp;<i class="fa fa-fw fa-plus rbg "></i></a>';
-				} else if ( treeNode.level == 1 ) {
-				s += '<a class="btn btn-info dropdown-toggle btn-xs" style="margin-left:10px;padding-top:0px;"  onclick="editNode('+treeNode.id+')" href="#" title="修改权限信息">&nbsp;&nbsp;<i class="fa fa-fw fa-edit rbg "></i></a>';
-				if (treeNode.children.length == 0) {
-				s += '<a class="btn btn-info dropdown-toggle btn-xs" style="margin-left:10px;padding-top:0px;" onclick="deleteNode('+treeNode.id+')" href="#" >&nbsp;&nbsp;<i class="fa fa-fw fa-times rbg "></i></a>';
-				}
-				s += '<a class="btn btn-info dropdown-toggle btn-xs" style="margin-left:10px;padding-top:0px;" onclick="addNode('+treeNode.id+')" href="#" >&nbsp;&nbsp;<i class="fa fa-fw fa-plus rbg "></i></a>';
-				} else if ( treeNode.level == 2 ) {
-				s += '<a class="btn btn-info dropdown-toggle btn-xs" style="margin-left:10px;padding-top:0px;"  onclick="editNode('+treeNode.id+')" href="#" title="修改权限信息">&nbsp;&nbsp;<i class="fa fa-fw fa-edit rbg "></i></a>';
-				s += '<a class="btn btn-info dropdown-toggle btn-xs" style="margin-left:10px;padding-top:0px;" onclick="deleteNode('+treeNode.id+')" href="#">&nbsp;&nbsp;<i class="fa fa-fw fa-times rbg "></i></a>';
-				}
-
-				s += '</span>';
-				aObj.after(s);
-			},
-			removeHoverDom: function(treeId, treeNode){  //用于当鼠标移出节点时，隐藏用户自定义控件，显示隐藏状态同 zTree 内部的编辑、删除按钮
-				$("#btnGroup"+treeNode.tId).remove();
-			}
-		}
-	};
-
-	// zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
-		zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
-	});
-    </script>
+					if(name == ''){
+						layer.msg("许可名称不能为空", {time:1000, icon:5, shift:6}, function(){
+        				});
+						return;
+					}
+					if(url == ''){
+						layer.msg("链接地址不能为空", {time:1000, icon:5, shift:6}, function(){
+        				});
+						return;
+					}
+					$.ajax({
+						type:"post",
+						url:"${APP_PATH}/permission/doEdit",
+						data:{
+							"name":name,
+							"url":url,
+							"id":${permission.id}
+						},
+						beforeSend:function(){
+							loadingIndex = layer.msg('处理中', {icon: 16});
+						},
+						success:function(result){
+							layer.close(loadingIndex);
+							if(result.success){
+									 layer.msg("修改菜单成功", {time:2000, icon:6}, function(){
+									 	window.location.href="${APP_PATH}/permission/index";
+                             		});
+							}else{
+								 layer.msg("修改菜单失败", {time:2000, icon:5, shift:6}, function(){
+                             	 });
+							}
+						}
+					});
+				})
+				$("#goreset").click(function(){
+					$("#editform")[0].reset();
+				});
+            });
+        </script>
   </body>
 </html>

@@ -14,6 +14,41 @@
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
     
+    
+    <mvc:interceptors>
+    	<mvc:interceptor>
+    		<mvc:mapping path="/**"/>
+    		<mvc:exclude-mapping path="/bootstrap"/>
+    		<mvc:exclude-mapping path="css"/>
+    		<mvc:exclude-mapping path="/fonts"/>
+    		<mvc:exclude-mapping path="/img"/>
+    		<mvc:exclude-mapping path="/jquery"/>
+    		<mvc:exclude-mapping path="/js"/>
+    		<mvc:exclude-mapping path="/layer"/>
+    		<mvc:exclude-mapping path="/script"/>
+    		<mvc:exclude-mapping path="/ztree"/>
+    		
+    		<mvc:exclude-mapping path="/login"/>
+    		<mvc:exclude-mapping path="/doLogin"/>
+    		<bean class="com.kj.permission.web.LoginInterceptor"></bean>
+    	</mvc:interceptor>
+    	<mvc:interceptor>
+    		<mvc:mapping path="/**"/>
+    		<mvc:exclude-mapping path="/bootstrap"/>
+    		<mvc:exclude-mapping path="css"/>
+    		<mvc:exclude-mapping path="/fonts"/>
+    		<mvc:exclude-mapping path="/img"/>
+    		<mvc:exclude-mapping path="/jquery"/>
+    		<mvc:exclude-mapping path="/js"/>
+    		<mvc:exclude-mapping path="/layer"/>
+    		<mvc:exclude-mapping path="/script"/>
+    		<mvc:exclude-mapping path="/ztree"/>
+    		
+    		<mvc:exclude-mapping path="/login"/>
+    		<mvc:exclude-mapping path="/doLogin"/>
+    		<bean class="com.kj.permission.web.AuthInterceptor"></bean>
+    	</mvc:interceptor>
+    </mvc:interceptors>
 
     <!--两个标准配置  -->
 	<!-- 将springmvc不能处理的请求交给tomcat -->

@@ -11,7 +11,7 @@ public class Permission {
 	private Integer pid;
 	
 	private Boolean open = true;
-	private Boolean checked;
+	private Boolean checked = false;
 	private String icon;
 	private List<Permission> children = new ArrayList<Permission>();
 	public Integer getId() {
